@@ -19,9 +19,10 @@ class PassiveDSController
     Mat basis_;
     Mat damping_eigval_;
     // function for getting desired motion flow
-    Vec (*velocity_field_)(Vec);
+    //Vec (*velocity_field_)(Vec);
 public:
-    PassiveDSController(int dim,Vec (*velocity_field)(Vec));
+    //PassiveDSController(int dim,Vec (*velocity_field)(Vec));
+    PassiveDSController(int dim);
     Mat ComputeDamping(Vec pos);
     void ComputeOrthogonalBasis(Vec dir);
 

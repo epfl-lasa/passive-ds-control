@@ -1,15 +1,24 @@
 #include "passive_ds_controller.h"
+
 #include <iostream>
-PassiveDSController::PassiveDSController(int dim, Vec (*velocity_field)(Vec))
+//PassiveDSController::PassiveDSController(int dim, Vec (*velocity_field)(Vec))
+//{
+//    dim_=dim;
+//    damping_.resize(dim,dim);
+//    damping_eigval_.resize(dim,dim);
+//    basis_.resize(dim,dim);
+//    basis_.setRandom();
+//    velocity_field_ = velocity_field;
+//}
+
+PassiveDSController::PassiveDSController(int dim)
 {
     dim_=dim;
     damping_.resize(dim,dim);
     damping_eigval_.resize(dim,dim);
     basis_.resize(dim,dim);
     basis_.setRandom();
-    velocity_field_ = velocity_field;
 }
-
 
 void PassiveDSController::ComputeOrthogonalBasis(Vec dir){
     assert(!(dir.rows()-basis_.rows()));
@@ -29,9 +38,8 @@ void PassiveDSController::set_damping_eigval(realtype damping_eigval0,realtype d
         damping_eigval_(i,i)=damping_eigval1;
 }
 
-Mat PassiveDSController::ComputeDamping(Vec pos)
+Mat PassiveDSController::ComputeDamping(Vec vel)
 {
-    Vec vel = velocity_field_(pos);
     realtype speed = vel.norm();
     speed = (speed > MINSPEED)? speed:MINSPEED;
     Vec dir = vel/speed;

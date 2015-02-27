@@ -1,23 +1,29 @@
 #include "passive_ds_controller.h"
+#include "linear_velocity_fields.h"
+
 #include <iostream>
 using namespace std;
 
-Vec compute_desired_vel(Vec pos){
-    Vec target;
-    target = pos*0.0;
-    return -0.1*(pos-target);
-}
 
 int main(int argc, char *argv[])
 {
+    int D = 3;
+    Vec target(D);
+    target(2)=1;
+    Mat A(D,D); A.setZero();
+    A(0,1) = 1;
+    A(1,0) = -1;
+    A(2,2) = -2;
+    linear_velocity_field circular_path(target,A,0.3);
+    linear_velocity_field straight_line(target,0.4*Mat::Identity(D,D),0.1);
     //PassiveDSController * my_passive_ds =new PassiveDSController;
     PassiveDSController * my_passive_ds;
-    my_passive_ds = new PassiveDSController(6,&compute_desired_vel);
+    my_passive_ds = new PassiveDSController(D);
     my_passive_ds->set_damping_eigval(0,10);
-    Vec temp(6);
+    Vec temp(D);
     temp.setZero();
-    temp(1)=1.0;
-    Mat hejsan = my_passive_ds->ComputeDamping(temp);
+    temp(0)=1.0;
+    Mat hejsan = my_passive_ds->ComputeDamping(circular_path(temp));
     cout<<hejsan<<endl;
     return 0;
 }
