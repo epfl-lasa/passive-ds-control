@@ -10,13 +10,13 @@ typedef double realtype;
 typedef Eigen::Matrix<realtype,Eigen::Dynamic,Eigen::Dynamic> Mat;
 typedef Eigen::Matrix<realtype,Eigen::Dynamic,1> Vec;
 
-class linear_velocity_field{
+class LinearVelocityField{
 private:
     Vec target_;
     Mat A_;
     realtype speedcap_;
 public:
-    linear_velocity_field(Vec target,Mat A,realtype speedcap){
+    LinearVelocityField(Vec target,Mat A,realtype speedcap){
         target_ = target;
         A_ = A;
         speedcap_=speedcap;
@@ -38,7 +38,7 @@ public:
   Mat A = -0.4*Mat::Identity(D,D)
   Vec target(D);
 
-  linear_velocity_field straightline_field(target,A,0.3);
+  LinearVelocityField straightline_field(target,A,0.3);
   // to evaluate the system:
   Vec currpos; // set its value from somewhere
   Vec vel = straightline_field(currpos);
@@ -48,7 +48,7 @@ public:
     A(0,1) = 1;
     A(1,0) = -1;
     A(2,2) = -3;
-    linear_velocity_field circular_path(target,A,0.3);
+    LinearVelocityField circular_path(target,A,0.3);
 
   **/
 
@@ -57,12 +57,12 @@ public:
 
 #endif // LINEAR_VELOCITY_FIELDS_H
 
-Vec linear_velocity_field::target() const
+Vec LinearVelocityField::target() const
 {
 return target_;
 }
 
-void linear_velocity_field::setTarget(const Vec &target)
+void LinearVelocityField::set_target(const Vec &target)
 {
 target_ = target;
 }

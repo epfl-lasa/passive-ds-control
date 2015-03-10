@@ -14,8 +14,8 @@ int main(int argc, char *argv[])
     A(0,1) = 1;
     A(1,0) = -1;
     A(2,2) = -2;
-    linear_velocity_field circular_path(target,A,10);
-    linear_velocity_field straight_line(target,0.4*Mat::Identity(D,D),0.1);
+    LinearVelocityField circular_path(target,A,10);
+    LinearVelocityField straight_line(target,0.4*Mat::Identity(D,D),0.1);
     //PassiveDSController * my_passive_ds =new PassiveDSController;
     PassiveDSController * my_passive_ds;
     my_passive_ds = new PassiveDSController(D,0,10);
