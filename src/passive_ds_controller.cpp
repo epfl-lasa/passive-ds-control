@@ -26,6 +26,13 @@ void assert_orthonormal(Mat & basis){
     }
 }
 
+
+Mat PassiveDSController::damping_eigval() const
+{
+    return damping_eigval_;
+}
+
+
 PassiveDSController::PassiveDSController(int dim,realtype damping_eigval0,realtype damping_eigval1)
 {
     damping_.resize(dim,dim);
@@ -38,7 +45,7 @@ PassiveDSController::PassiveDSController(int dim,realtype damping_eigval0,realty
 }
 
 
-void PassiveDSController::ComputeOrthonormalBasis(Vec dir){
+void PassiveDSController::ComputeOrthonormalBasis(const Vec &dir){
     assert(dir.rows()==basis_.rows());
     basis_.col(0)=dir;
     orthonormalize(basis_);
@@ -52,7 +59,7 @@ void PassiveDSController::set_damping_eigval(realtype damping_eigval0,realtype d
         damping_eigval_(i,i)=damping_eigval1;
 }
 
-Mat PassiveDSController::ComputeDamping(Vec vel)
+Mat PassiveDSController::ComputeDamping(const Vec &vel)
 {
     // only proceed of we have a minimum velocity norm!
     if(vel.norm() > MINSPEED)
@@ -61,3 +68,19 @@ Mat PassiveDSController::ComputeDamping(Vec vel)
     damping_ = basis_*damping_eigval_*basis_.transpose();
     return damping_;
 }
+
+
+void PassiveDSController::set_damping_eigval(const Mat& damping_eigval)
+{
+    assert(damping_eigval.rows() == damping_eigval_.rows());
+    if(damping_eigval.cols() != damping_eigval_.cols()){
+        assert(damping_eigval.cols()==1);
+        damping_eigval_.setZero();
+        for (int i = 0; i < damping_eigval.rows(); i++) {
+            damping_eigval_(i,i) = damping_eigval(i);
+        }
+    }else{
+         damping_eigval_ = damping_eigval;
+    }
+}
+

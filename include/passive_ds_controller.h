@@ -2,13 +2,7 @@
 #define PASSIVEDSCONTROLLER_H
 
 #include "eigen3/Eigen/Dense"
-
-typedef float realtype;
-#ifdef USE_DOUBLE_PRECISION
-typedef double realtype;
-#endif
-typedef Eigen::Matrix<realtype,Eigen::Dynamic,Eigen::Dynamic> Mat;
-typedef Eigen::Matrix<realtype,Eigen::Dynamic,1> Vec;
+#include "passive_ds_typedefs.h"
 
 
 static realtype MINSPEED = 1e-6;
@@ -23,10 +17,14 @@ class PassiveDSController
 public:
     //PassiveDSController(int dim,Vec (*velocity_field)(Vec));
     PassiveDSController(int dim, realtype damping_eigval0, realtype damping_eigval1);
-    Mat ComputeDamping(Vec pos);
-    void ComputeOrthonormalBasis(Vec dir);
+    Mat ComputeDamping(const Vec& vel);
+    void ComputeOrthonormalBasis(const Vec& dir);
 
     void set_damping_eigval(realtype damping_eigval0, realtype damping_eigval1);
+    void set_damping_eigval(const Mat& damping_eigval);
+
+    Mat damping_eigval() const;
+    //void setDamping_eigval(const Mat &damping_eigval);
 };
 
 #endif // PASSIVEDSCONTROLLER_H

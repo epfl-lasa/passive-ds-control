@@ -2,13 +2,9 @@
 #define LINEAR_VELOCITY_FIELDS_H
 
 #include "eigen3/Eigen/Dense"
+#include "passive_ds_typedefs.h"
 
-typedef float realtype;
-#ifdef USE_DOUBLE_PRECISION
-typedef double realtype;
-#endif
-typedef Eigen::Matrix<realtype,Eigen::Dynamic,Eigen::Dynamic> Mat;
-typedef Eigen::Matrix<realtype,Eigen::Dynamic,1> Vec;
+
 
 class LinearVelocityField{
 private:
@@ -21,12 +17,17 @@ public:
         A_ = A;
         speedcap_=speedcap;
     }
-    Vec operator()(Vec pos){
+    Vec ComputeVelocity(const Vec& pos){
         Vec vel = A_*(pos-target_);
         if(vel.norm()>speedcap_){
-            vel /= vel.norm()*speedcap_;
+            vel /= vel.norm();
+            vel *= speedcap_;
         }
         return vel;
+    }
+
+    Vec operator()(const Vec& pos){
+        return this->ComputeVelocity(pos);
     }
     Vec target() const;
     void set_target(const Vec &target);
