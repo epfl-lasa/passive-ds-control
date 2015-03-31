@@ -1,7 +1,7 @@
 #ifndef PASSIVE_DS_TYPEDEFS_H
 #define PASSIVE_DS_TYPEDEFS_H
 
-
+#include "eigen3/Eigen/Dense"
 #ifdef USE_DOUBLE_PRECISION
 typedef double realtype;
 #else

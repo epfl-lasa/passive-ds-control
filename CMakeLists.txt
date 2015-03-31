@@ -5,7 +5,7 @@ set(CMAKE_BUILD_TYPE Debug)
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
-find_package(catkin REQUIRED)
+find_package(catkin REQUIRED COMPONENTS generic_filters execution_timer)
 find_package(Eigen3 REQUIRED)
 
 add_definitions(-DUSE_DOUBLE_PRECISION)
@@ -22,7 +22,7 @@ add_definitions(-DUSE_DOUBLE_PRECISION)
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
   INCLUDE_DIRS include
-  LIBRARIES passive_ds_control
+  LIBRARIES passive_ds_control cascade_ds_control
 #  CATKIN_DEPENDS other_catkin_pkg
 #  DEPENDS system_lib
 )
@@ -30,6 +30,7 @@ catkin_package(
 ###########
 ## Build ##
 ###########
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
@@ -43,8 +44,13 @@ add_library(passive_ds_control
   src/passive_ds_controller.cpp ${HEADERS}
 )
 
+add_library(cascade_ds_control
+  src/cascade_ds_controller.cpp ${HEADERS}
+)
+
 ## Declare a cpp executable
-add_executable(main src/main.cpp)
+add_executable(passive_ds_test src/main.cpp)
+add_executable(cascade_ds_test src/cascade_main.cpp)
 
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes
@@ -54,5 +60,5 @@ add_executable(main src/main.cpp)
 # target_link_libraries(passive_ds_control_node
 #   ${catkin_LIBRARIES}
 # )
-target_link_libraries(main passive_ds_control)
-
+target_link_libraries(passive_ds_test passive_ds_control)
+target_link_libraries(cascade_ds_test cascade_ds_control)
