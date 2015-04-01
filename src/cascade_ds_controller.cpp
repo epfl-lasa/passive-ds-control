@@ -11,7 +11,7 @@ CascadeDSController::CascadeDSController(size_t dim,  std::function<Vec(Vec)> ta
     process_filter_ = process_filter;
 }
 
-void CascadeDSController::ForwardIntegration(realtype driving_force, realtype dt, realtype speed_threshold)
+void CascadeDSController::ForwardIntegration(realtype driving_force,const Mat& stiffness, realtype dt, realtype speed_threshold)
 {
     ref_pos_ = filt_pos_;
     //std::cout<<ref_pos_<<filt_pos_<<std::endl;
@@ -22,11 +22,11 @@ void CascadeDSController::ForwardIntegration(realtype driving_force, realtype dt
            break;
         ref_pos_ += ref_vel_*dt;
         //std::cout<<act_pos_-ref_pos_<<std::endl;
-        force_proj = ref_vel_.dot((ref_pos_-act_pos_))/ref_vel_.norm();
+        force_proj = ref_vel_.dot(-stiffness*(act_pos_-ref_pos_))/ref_vel_.norm();
     }
 }
 
-void CascadeDSController::Reset(const Vec &act_pos)
+void CascadeDSController::Reset(const Vec &act_pos,int n_burn)
 {
     act_pos_ = act_pos;
     // burn in the filter
@@ -39,16 +39,18 @@ Mat CascadeDSController::IntegrateTrajectory(realtype dt, realtype speed_thresho
 {
     int n_max = int(t_max/dt);
     Mat traj(dim_,n_max);
-    ref_pos_ = filt_pos_;
+    Vec rpos = filt_pos_;
+    Vec rvel = rpos;
+    rvel.setZero();
     int n = 0;
     while(n<n_max){
-        traj.col(n)=ref_pos_;
-        ref_vel_ = task_dynamics_(ref_pos_);
-        if(ref_vel_.norm()<speed_threshold){
+        traj.col(n)=rpos;
+        rvel = task_dynamics_(rpos);
+        if(rvel.norm()<speed_threshold){
             traj.resize(dim_,n+1);
             break;
         }
-        ref_pos_ += ref_vel_*dt;
+        rpos += rvel*dt;
         n++;
     }
     return traj;

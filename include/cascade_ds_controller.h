@@ -28,8 +28,8 @@ class CascadeDSController
 
 public:
     CascadeDSController(size_t dim, std::function<Vec(Vec)> task_dynamics,std::function<Vec(Vec)> process_filter);
-    void ForwardIntegration(realtype driving_force, realtype dt,realtype speed_threshold);
-    void Reset(const Vec& act_pos);
+    void ForwardIntegration(realtype driving_force,const Mat& stiffness, realtype dt, realtype speed_threshold);
+    void Reset(const Vec& act_pos, int n_burn=N_BURN);
     Mat IntegrateTrajectory(realtype dt,realtype speed_threshold,realtype t_max);
 
     void Update(const Vec &act_pos);
