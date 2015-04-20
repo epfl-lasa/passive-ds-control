@@ -46,6 +46,10 @@
   <build_depend>execution_timer </build_depend>
   <run_depend>execution_timer </run_depend>
 
+  <build_depend>mathlib </build_depend>
+  <run_depend>mathlib </run_depend>
+
+
   <!-- The export tag contains other, unspecified, tags -->
   <export>
     <!-- You can specify that this package is a metapackage here: -->

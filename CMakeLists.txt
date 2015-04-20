@@ -5,7 +5,7 @@ set(CMAKE_BUILD_TYPE Debug)
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
-find_package(catkin REQUIRED COMPONENTS generic_filters execution_timer)
+find_package(catkin REQUIRED COMPONENTS generic_filters execution_timer mathlib)
 find_package(Eigen3 REQUIRED)
 
 add_definitions(-DUSE_DOUBLE_PRECISION)
@@ -60,5 +60,5 @@ add_executable(cascade_ds_test src/cascade_main.cpp)
 # target_link_libraries(passive_ds_control_node
 #   ${catkin_LIBRARIES}
 # )
-target_link_libraries(passive_ds_test passive_ds_control)
-target_link_libraries(cascade_ds_test cascade_ds_control)
+target_link_libraries(passive_ds_test passive_ds_control ${catkin_LIBRARIES})
+target_link_libraries(cascade_ds_test cascade_ds_control ${catkin_LIBRARIES})

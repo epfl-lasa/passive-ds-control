@@ -29,8 +29,12 @@ public:
     Vec operator()(const Vec& pos){
         return this->ComputeVelocity(pos);
     }
-    Vec target() const;
-    void set_target(const Vec &target);
+    Vec target() const{
+        return target_;
+    }
+    void set_target(const Vec &target){
+        target_ = target;
+    }
 };
 
 /**
@@ -58,12 +62,3 @@ public:
 
 #endif // LINEAR_VELOCITY_FIELDS_H
 
-Vec LinearVelocityField::target() const
-{
-return target_;
-}
-
-void LinearVelocityField::set_target(const Vec &target)
-{
-target_ = target;
-}
