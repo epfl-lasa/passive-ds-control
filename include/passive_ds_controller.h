@@ -18,7 +18,6 @@ protected:
     Mat basis_;
     Mat damping_eigval_;
     Vec control_output_;
-    std::vector<bool> track_dof_;
 
 public:
     //PassiveDSController(int dim,Vec (*velocity_field)(Vec));
@@ -30,10 +29,8 @@ public:
 
     void set_damping_eigval(realtype damping_eigval0, realtype damping_eigval1);
     void set_damping_eigval(const Mat& damping_eigval);
-    void set_dof_tracking(int dof_id,bool tracking_active=true);
 
     Mat damping_eigval() const;
-    //void setDamping_eigval(const Mat &damping_eigval);
     Vec control_output() const;
 
 };
@@ -51,6 +48,7 @@ public:
     PassiveDSController(int dim, realtype damping_eigval0, realtype damping_eigval1, realtype s_max, realtype ds, realtype dz=0.0);
     void Update(const Vec& vel, const Vec& ref_vel,realtype dt);
     void Update(const Vec &vel, const Vec &ref_vel_c, const Vec &ref_vel_nc,realtype dt);
+    realtype s() const;
 };
 
 #endif // PASSIVEDSCONTROLLER_H

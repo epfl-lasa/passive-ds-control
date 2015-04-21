@@ -50,10 +50,7 @@ DSController::DSController(int dim,realtype damping_eigval0,realtype damping_eig
     basis_.setRandom();
     orthonormalize(basis_);
     assert_orthonormal(basis_);
-    // per default, disable tracking for all dofs
-    for(int i=0;i<dim;i++){
-        track_dof_.push_back(false);
-    }
+
 }
 
 
@@ -106,11 +103,13 @@ void DSController::set_damping_eigval(const Mat& damping_eigval)
     }
 }
 
-void DSController::set_dof_tracking(int dof_id, bool tracking_active)
+
+
+
+realtype PassiveDSController::s() const
 {
-
+    return s_;
 }
-
 
 
 PassiveDSController::PassiveDSController(int dim, realtype damping_eigval0, realtype damping_eigval1, realtype s_max, realtype ds, realtype dz):
