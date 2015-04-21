@@ -13,6 +13,7 @@ static realtype FLOATEQUAL = 1e-6;
 
 class DSController
 {
+protected:
     Mat damping_;
     Mat basis_;
     Mat damping_eigval_;
@@ -24,7 +25,7 @@ public:
     DSController(int dim, realtype damping_eigval0, realtype damping_eigval1);
     Mat ComputeDamping(const Vec& vel);
     void ComputeOrthonormalBasis(const Vec& dir);
-    virtual void Update(const Vec& vel, const Vec& ref_vel_c, const Vec &ref_vel_nc);
+    void Update(const Vec& vel, const Vec& ref_vel);
 
 
     void set_damping_eigval(realtype damping_eigval0, realtype damping_eigval1);
@@ -42,17 +43,14 @@ class PassiveDSController : public DSController
 {
 private:
     realtype s_;
-    realtype s_max_;
-    realtype ds_;
-    realtype dz_;
 
-    std::unique_ptr<SmoothRise2d> beta_s_;
-    std::unique_ptr<SmoothRiseFall2d> beta_r_;
-    std::unique_ptr<SmoothRiseFall> alpha_;
-
+    SmoothRise2d beta_s_;
+    SmoothRiseFall2d beta_r_;
+    SmoothRiseFall alpha_;
 public:
-    PassiveDSController(int dim, realtype daming_eigval0, realtype damping_eigval1);
-    virtual void Update(const Vec &vel, const Vec &ref_vel_c, const Vec &ref_vel_nc);
+    PassiveDSController(int dim, realtype damping_eigval0, realtype damping_eigval1, realtype s_max, realtype ds, realtype dz=0.0);
+    void Update(const Vec& vel, const Vec& ref_vel,realtype dt);
+    void Update(const Vec &vel, const Vec &ref_vel_c, const Vec &ref_vel_nc,realtype dt);
 };
 
 #endif // PASSIVEDSCONTROLLER_H
