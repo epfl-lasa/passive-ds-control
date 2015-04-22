@@ -78,11 +78,11 @@ void DSController::set_damping_eigval(realtype damping_eigval0,realtype damping_
         damping_eigval_(i,i)=damping_eigval1;
 }
 
-Mat DSController::ComputeDamping(const Vec &vel)
+Mat DSController::ComputeDamping(const Vec &ref_vel)
 {
     // only proceed of we have a minimum velocity norm!
-    if(vel.norm() > MINSPEED)
-        ComputeOrthonormalBasis(vel);
+    if(ref_vel.norm() > MINSPEED)
+        ComputeOrthonormalBasis(ref_vel);
     // otherwise just use the last computed basis
     damping_ = basis_*damping_eigval_*basis_.transpose();
     return damping_;

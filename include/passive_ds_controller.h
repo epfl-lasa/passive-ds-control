@@ -22,7 +22,7 @@ protected:
 public:
     //PassiveDSController(int dim,Vec (*velocity_field)(Vec));
     DSController(int dim, realtype damping_eigval0, realtype damping_eigval1);
-    Mat ComputeDamping(const Vec& vel);
+    Mat ComputeDamping(const Vec& ref_vel);
     void ComputeOrthonormalBasis(const Vec& dir);
     void Update(const Vec& vel, const Vec& ref_vel);
 

@@ -6,7 +6,7 @@
 
 
 // smooth step function returnning exactly 0.0 for val<lo and exactly 1.0 for val>1 and smooth transition in between
-realtype smooth_rise(realtype val,realtype lo, realtype hi){
+inline realtype smooth_rise(realtype val,realtype lo, realtype hi){
     assert(hi>=lo);
     if(val>=hi)
         return 1.0;
@@ -21,7 +21,7 @@ realtype smooth_rise(realtype val,realtype lo, realtype hi){
 
 
 // smooth step function returnning exactly 1.0 for val<hi and exactly 0.0 for val>lo and smooth transition in between
-realtype smooth_fall(realtype val,realtype hi, realtype lo){
+inline realtype smooth_fall(realtype val,realtype hi, realtype lo){
     assert(lo>=hi);
     if(val>=lo)
         return 0.0;
