@@ -48,6 +48,9 @@ add_library(cascade_ds_control
   src/cascade_ds_controller.cpp ${HEADERS}
 )
 
+add_library(openloop_ds_control
+  src/openloop_ds_controller.cpp ${HEADERS}
+)
 ## Declare a cpp executable
 add_executable(passive_ds_test src/main.cpp)
 add_executable(cascade_ds_test src/cascade_main.cpp)
@@ -62,3 +65,4 @@ add_executable(cascade_ds_test src/cascade_main.cpp)
 # )
 target_link_libraries(passive_ds_test passive_ds_control ${catkin_LIBRARIES})
 target_link_libraries(cascade_ds_test cascade_ds_control ${catkin_LIBRARIES})
+#target_link_libraries(cascade_ds_test cascade_ds_control ${catkin_LIBRARIES})
