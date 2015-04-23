@@ -26,7 +26,6 @@ public:
     void ComputeOrthonormalBasis(const Vec& dir);
     void Update(const Vec& vel, const Vec& ref_vel);
 
-
     void set_damping_eigval(realtype damping_eigval0, realtype damping_eigval1);
     void set_damping_eigval(const Mat& damping_eigval);
 
@@ -41,13 +40,13 @@ class PassiveDSController : public DSController
 private:
     realtype s_;
 
-    SmoothRise2d beta_s_;
-    SmoothRiseFall2d beta_r_;
+    SmoothRise2d beta_r_;
+    SmoothRiseFall2d beta_s_;
     SmoothRiseFall alpha_;
 public:
     PassiveDSController(int dim, realtype damping_eigval0, realtype damping_eigval1, realtype s_max, realtype ds, realtype dz=0.0);
-    void Update(const Vec& vel, const Vec& ref_vel,realtype dt);
-    void Update(const Vec &vel, const Vec &ref_vel_c, const Vec &ref_vel_nc,realtype dt);
+    void UpdatePassive(const Vec& vel, const Vec& ref_vel,realtype dt);
+    void UpdatePassive(const Vec &vel, const Vec &ref_vel_c, const Vec &ref_vel_nc,realtype dt);
     realtype s() const;
 };
 

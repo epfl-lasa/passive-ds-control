@@ -60,7 +60,7 @@ void test_passive_ds(){
         Vec vel = data.block<1,2>(i,3).transpose();
         Vec ref_vel_c = data.block<1,2>(i,6);
         Vec ref_vel_nc = data.block<1,2>(i,8);
-        mps.Update(vel,ref_vel_c,ref_vel_nc,dt);
+        mps.UpdatePassive(vel,ref_vel_c,ref_vel_nc,dt);
         storage(i) = mps.s();
     }
 

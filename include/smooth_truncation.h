@@ -83,7 +83,7 @@ public:
 };
 
 
-// functor returning exactly 0 for x<xlo and y<ylo and >0  elsewhere. Smoothness controlled by dx and dy
+// functor returning exactly 0 for x >= xlo and y =<ylo and >0  elsewhere. Smoothness controlled by dx and dy
 class SmoothRise2d{
 private:
     realtype xlo_,dx_,ylo_,dy_;
@@ -92,9 +92,9 @@ public:
         xlo_(xlo),dx_(dx),ylo_(ylo),dy_(dy) {}
 
     realtype operator() (realtype x,realtype y){
-        realtype h1 = smooth_fall(x,xlo_,xlo_+dx_);
+        realtype h1 = smooth_rise(x,xlo_,xlo_+dx_);
         h1 *= smooth_fall(y,ylo_,ylo_+dy_);
-        return 1.0-h1;
+        return 1-h1;
     }
 
 };
