@@ -22,7 +22,7 @@ add_definitions(-DUSE_DOUBLE_PRECISION)
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
   INCLUDE_DIRS include
-  LIBRARIES passive_ds_control cascade_ds_control
+  LIBRARIES passive_ds_control cascade_ds_control openloop_ds_control
 #  CATKIN_DEPENDS other_catkin_pkg
 #  DEPENDS system_lib
 )
@@ -49,12 +49,12 @@ add_library(cascade_ds_control
 )
 
 add_library(openloop_ds_control
-  src/openloop_ds_controller.cpp ${HEADERS}
+  src/openloop_ds_controller.cpp
 )
 ## Declare a cpp executable
 add_executable(passive_ds_test src/main.cpp)
 add_executable(cascade_ds_test src/cascade_main.cpp)
-
+add_executable(openloop_test src/openloop_test.cpp)
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes
 # add_dependencies(passive_ds_control_node passive_ds_control_generate_messages_cpp)
@@ -65,4 +65,4 @@ add_executable(cascade_ds_test src/cascade_main.cpp)
 # )
 target_link_libraries(passive_ds_test passive_ds_control ${catkin_LIBRARIES})
 target_link_libraries(cascade_ds_test cascade_ds_control ${catkin_LIBRARIES})
-#target_link_libraries(cascade_ds_test cascade_ds_control ${catkin_LIBRARIES})
+target_link_libraries(openloop_test openloop_ds_control ${catkin_LIBRARIES})

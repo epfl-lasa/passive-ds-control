@@ -196,10 +196,10 @@ void PassiveDSController::UpdatePassive(const Vec &vel, const Vec &ref_vel_c,con
     realtype z = vel.dot(ref_vel_nc);
     if(fabs(z)<0.01)
         z = 0.0;
-    std::cout<<"value of z:"<< z <<std::endl;
+    //std::cout<<"value of z:"<< z <<std::endl;
     // add the non-censervative driving control
     control_output_ += damping_eigval_(0)*beta_r_(z,s_)*ref_vel_nc;
-    std::cout<<"value of beta_R: "<<beta_r_(z,s_)<<std::endl;
+    //std::cout<<"value of beta_R: "<<beta_r_(z,s_)<<std::endl;
     // update storage
     realtype sdot = alpha_(s_)*vel.transpose()*damping_*vel;
     sdot -= beta_s_(z,s_)*damping_eigval_(0)*z;

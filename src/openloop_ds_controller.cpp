@@ -16,6 +16,11 @@ Vec OpenloopDSController::ref_pos() const
     return ref_pos_+ds_origin_;
 }
 
+Vec OpenloopDSController::start_pos() const
+{
+    return start_pos_;
+}
+
 OpenloopDSController::OpenloopDSController(size_t dim, std::function<Vec(Vec)> task_dynamics) : dim_(dim), task_dynamics_(task_dynamics)
 {
     // make a test call to the supplied dynamics function and filter function
@@ -51,7 +56,27 @@ OpenloopDSController::OpenloopDSController(size_t dim, std::function<Vec (Vec)> 
 void OpenloopDSController::Restart(const Vec &start_pos)
 {
     assert(start_pos.rows() == dim_);
-    ref_pos_ = start_pos - ds_origin_;
+    start_pos_ = start_pos;
+    ref_pos_ = start_pos_ - ds_origin_;
+}
+
+Mat OpenloopDSController::GetTrajectory(realtype dt,realtype speed_threshold,realtype t_max){
+    int n_max = floor(t_max/dt);
+    Vec rpos = start_pos_-ds_origin_;
+    Vec rvel(3);
+    Mat traj(dim_,n_max);
+    int n=0;
+    while(n<n_max){
+        traj.col(n)=rpos+ds_origin_;
+        rvel = task_dynamics_(rpos);
+        if(rvel.norm()<speed_threshold){
+            traj.resize(dim_,n+1);
+            break;
+        }
+        rpos += rvel*dt;
+        n++;
+    }
+    return traj;
 }
 
 void OpenloopDSController::Update(const Vec& act_pos,const Vec& act_vel,realtype dt)

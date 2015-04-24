@@ -4,6 +4,9 @@
 #include "passive_ds_typedefs.h"
 #include <functional>
 
+
+// TODO: Add computation of control effort using stiffness and damping internally
+
 class CascadeDSController
 {
     static const int N_BURN=1000;
@@ -24,6 +27,8 @@ class CascadeDSController
     Vec ref_pos_;
     Vec ref_vel_;
 
+    Vec ds_origin_;
+
 
 
 public:
@@ -33,8 +38,9 @@ public:
     Mat IntegrateTrajectory(realtype dt,realtype speed_threshold,realtype t_max);
 
     void Update(const Vec &act_pos);
-    const Vec& ref_pos(){return ref_pos_;}
+    Vec ref_pos(){return ref_pos_+ds_origin_;}
     size_t dim(){return dim_;}
+    void set_ds_origin(const Vec& ds_origin);
 };
 
 #endif // CASCADE_DS_CONTROLLER_H

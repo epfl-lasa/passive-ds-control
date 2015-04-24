@@ -19,6 +19,7 @@ class OpenloopDSController
     size_t dim_;
 
     Vec ref_pos_;
+    Vec start_pos_;
     Vec ref_vel_;
     Vec ds_origin_;
 
@@ -43,6 +44,8 @@ public:
     void set_ds_origin(const Vec& ds_origin);
     void set_tracking(bool tr = true){b_tracking_ = tr;}
     Vec ref_pos() const;
+    Vec start_pos() const;
+    Mat GetTrajectory(realtype dt, realtype speed_threshold, realtype t_max);
 };
 
 #endif // OPENLOOP_DS_CONTROLLER_H
