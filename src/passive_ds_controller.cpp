@@ -115,56 +115,57 @@ realtype PassiveDSController::s() const
 PassiveDSController::PassiveDSController(int dim, realtype damping_eigval0, realtype damping_eigval1, realtype s_max, realtype ds, realtype dz):
     DSController(dim, damping_eigval0, damping_eigval1),
     s_(s_max),
+    s_max_(s_max),
     beta_r_(0.0,dz,0.0,ds),
     beta_s_(0.0,0.0,dz,0.0,s_max,ds),
     alpha_(0.0,0.0+ds,s_max-ds,s_max)
 {
-    realtype z=0.2;
-    realtype s=101.0;
-    std::cout<<"z="<<z<<", s="<<s<<", beta_s="<<beta_s_(z,s)<<std::endl;
-    z=0.2; s=100.0;
-    std::cout<<"z="<<z<<", s="<<s<<", beta_s="<<beta_s_(z,s)<<std::endl;
-    z=0.2; s=90.0;
-    std::cout<<"z="<<z<<", s="<<s<<", beta_s="<<beta_s_(z,s)<<std::endl;
-    z=0.2; s=2;
-    std::cout<<"z="<<z<<", s="<<s<<", beta_s="<<beta_s_(z,s)<<std::endl;
-    z=0.2; s=0.0;
-    std::cout<<"z="<<z<<", s="<<s<<", beta_s="<<beta_s_(z,s)<<std::endl;
+//    realtype z=0.2;
+//    realtype s=101.0;
+//    std::cout<<"z="<<z<<", s="<<s<<", beta_s="<<beta_s_(z,s)<<std::endl;
+//    z=0.2; s=100.0;
+//    std::cout<<"z="<<z<<", s="<<s<<", beta_s="<<beta_s_(z,s)<<std::endl;
+//    z=0.2; s=90.0;
+//    std::cout<<"z="<<z<<", s="<<s<<", beta_s="<<beta_s_(z,s)<<std::endl;
+//    z=0.2; s=2;
+//    std::cout<<"z="<<z<<", s="<<s<<", beta_s="<<beta_s_(z,s)<<std::endl;
+//    z=0.2; s=0.0;
+//    std::cout<<"z="<<z<<", s="<<s<<", beta_s="<<beta_s_(z,s)<<std::endl;
 
 
-    std::cout<<std::endl;
-    z=-0.2; s=100.0;
-    std::cout<<"z="<<z<<", s="<<s<<", beta_s="<<beta_s_(z,s)<<std::endl;
-    z=-0.2; s=90.0;
-    std::cout<<"z="<<z<<", s="<<s<<", beta_s="<<beta_s_(z,s)<<std::endl;
-    z=-0.2; s=2;
-    std::cout<<"z="<<z<<", s="<<s<<", beta_s="<<beta_s_(z,s)<<std::endl;
-    z=-0.2; s=0.0;
-    std::cout<<"z="<<z<<", s="<<s<<", beta_s="<<beta_s_(z,s)<<std::endl;
+//    std::cout<<std::endl;
+//    z=-0.2; s=100.0;
+//    std::cout<<"z="<<z<<", s="<<s<<", beta_s="<<beta_s_(z,s)<<std::endl;
+//    z=-0.2; s=90.0;
+//    std::cout<<"z="<<z<<", s="<<s<<", beta_s="<<beta_s_(z,s)<<std::endl;
+//    z=-0.2; s=2;
+//    std::cout<<"z="<<z<<", s="<<s<<", beta_s="<<beta_s_(z,s)<<std::endl;
+//    z=-0.2; s=0.0;
+//    std::cout<<"z="<<z<<", s="<<s<<", beta_s="<<beta_s_(z,s)<<std::endl;
 
 
-    std::cout<<std::endl;
-    z=0.2; s=101.0;
-    std::cout<<"z="<<z<<", s="<<s<<", beta_r="<<beta_r_(z,s)<<std::endl;
-    z=0.2; s=100.0;
-    std::cout<<"z="<<z<<", s="<<s<<", beta_r="<<beta_r_(z,s)<<std::endl;
-    z=0.2; s=90.0;
-    std::cout<<"z="<<z<<", s="<<s<<", beta_r="<<beta_r_(z,s)<<std::endl;
-    z=0.2; s=2;
-    std::cout<<"z="<<z<<", s="<<s<<", beta_r="<<beta_r_(z,s)<<std::endl;
-    z=0.2; s=0.0;
-    std::cout<<"z="<<z<<", s="<<s<<", beta_r="<<beta_r_(z,s)<<std::endl;
+//    std::cout<<std::endl;
+//    z=0.2; s=101.0;
+//    std::cout<<"z="<<z<<", s="<<s<<", beta_r="<<beta_r_(z,s)<<std::endl;
+//    z=0.2; s=100.0;
+//    std::cout<<"z="<<z<<", s="<<s<<", beta_r="<<beta_r_(z,s)<<std::endl;
+//    z=0.2; s=90.0;
+//    std::cout<<"z="<<z<<", s="<<s<<", beta_r="<<beta_r_(z,s)<<std::endl;
+//    z=0.2; s=2;
+//    std::cout<<"z="<<z<<", s="<<s<<", beta_r="<<beta_r_(z,s)<<std::endl;
+//    z=0.2; s=0.0;
+//    std::cout<<"z="<<z<<", s="<<s<<", beta_r="<<beta_r_(z,s)<<std::endl;
 
 
-    std::cout<<std::endl;
-    z=-0.2; s=100.0;
-    std::cout<<"z="<<z<<", s="<<s<<", beta_r="<<beta_r_(z,s)<<std::endl;
-    z=-0.2; s=90.0;
-    std::cout<<"z="<<z<<", s="<<s<<", beta_r="<<beta_r_(z,s)<<std::endl;
-    z=-0.2; s=2;
-    std::cout<<"z="<<z<<", s="<<s<<", beta_r="<<beta_r_(z,s)<<std::endl;
-    z=-0.2; s=0.0;
-    std::cout<<"z="<<z<<", s="<<s<<", beta_r="<<beta_r_(z,s)<<std::endl;
+//    std::cout<<std::endl;
+//    z=-0.2; s=100.0;
+//    std::cout<<"z="<<z<<", s="<<s<<", beta_r="<<beta_r_(z,s)<<std::endl;
+//    z=-0.2; s=90.0;
+//    std::cout<<"z="<<z<<", s="<<s<<", beta_r="<<beta_r_(z,s)<<std::endl;
+//    z=-0.2; s=2;
+//    std::cout<<"z="<<z<<", s="<<s<<", beta_r="<<beta_r_(z,s)<<std::endl;
+//    z=-0.2; s=0.0;
+//    std::cout<<"z="<<z<<", s="<<s<<", beta_r="<<beta_r_(z,s)<<std::endl;
 
 
 //    std::cout<<"z=0.2, s=101.0: "<<beta_r_(0.2,101.0)<<std::endl;
@@ -204,4 +205,9 @@ void PassiveDSController::UpdatePassive(const Vec &vel, const Vec &ref_vel_c,con
     realtype sdot = alpha_(s_)*vel.transpose()*damping_*vel;
     sdot -= beta_s_(z,s_)*damping_eigval_(0)*z;
     s_ += sdot*dt;
+}
+
+void PassiveDSController::reset_storage()
+{
+    s_ = s_max_;
 }
