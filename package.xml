@@ -43,9 +43,6 @@
   <build_depend>generic_filters </build_depend>
   <run_depend>generic_filters </run_depend>
 
-  <build_depend>execution_timer </build_depend>
-  <run_depend>execution_timer </run_depend>
-
   <build_depend>mathlib </build_depend>
   <run_depend>mathlib </run_depend>
 

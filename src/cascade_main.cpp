@@ -3,7 +3,7 @@
 #include "linear_velocity_fields.h"
 #include "exponentialsmoother.h"
 #include <functional>
-#include "timer.h"
+//#include "timer.h"
 
 
 int main(int argc, char *argv[])
@@ -19,9 +19,9 @@ int main(int argc, char *argv[])
     std::cout<<f(temp)<<std::endl;
     CascadeDSController casc_ctrl(D,std::bind(&LinearVelocityField::ComputeVelocity,&straight_line,std::placeholders::_1),std::bind(&ExponentialSmoother<Vec>::filter,&filter,std::placeholders::_1));
     casc_ctrl.Reset(Vec::Random(3));
-    Timer t;
+    //Timer t;
     //casc_ctrl.ForwardIntegration(0.02,0.002,0.01);
-    std::cout<<t.elapsed()<<std::endl;
+    //std::cout<<t.elapsed()<<std::endl;
     std::cout<<"computed ref pos: "<<casc_ctrl.ref_pos()<<std::endl;
     return 0;
 }
