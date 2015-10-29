@@ -1,0 +1,1 @@
+- git: {local-name: robot-toolkit, uri: 'git@github.com:epfl-lasa/robot-toolkit.git'}
