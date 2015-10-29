@@ -7,7 +7,6 @@ set(CMAKE_CXX_FLAGS "-O3")
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS generic_filters  mathlib)
-find_package(Eigen3 REQUIRED)
 
 add_definitions(-DUSE_DOUBLE_PRECISION)
 
@@ -35,7 +34,7 @@ SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
-include_directories(include ${Eigen_INCLUDE_DIRS} ${catkin_INCLUDE_DIRS})
+include_directories(include ${catkin_INCLUDE_DIRS})
 
 #this step is required to have the files how up in qtcreator
 file(GLOB HEADERS "include/*.h")
