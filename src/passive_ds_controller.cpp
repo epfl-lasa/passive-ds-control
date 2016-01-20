@@ -40,7 +40,6 @@ Vec DSController::control_output() const
 }
 
 
-
 DSController::DSController(int dim,realtype damping_eigval0,realtype damping_eigval1)
 {
     damping_.resize(dim,dim);

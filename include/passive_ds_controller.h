@@ -7,7 +7,6 @@
 #include "smooth_truncation.h"
 #include <memory>
 
-
 static realtype MINSPEED = 1e-6;
 static realtype FLOATEQUAL = 1e-6;
 
