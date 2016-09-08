@@ -53,3 +53,11 @@ my_passive_ds->reset_storage();
       
       
 ```
+## Documentation
+You can get some basic source code documentation by running doxygen.
+
+```
+sudo apt-get install doxygen
+roscd passive_ds_control
+doxygen Doxyfile
+```
