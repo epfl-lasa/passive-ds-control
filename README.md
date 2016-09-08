@@ -1,7 +1,8 @@
 # Passive DS Control
 Catkin package implementing various DS controllers, including controller proposed in
 ```
-K. Kronander and A. Billard; Passive Interaction Control with Dynamical Systems; IEEE Robotics and Automation Letters; 2016
+K. Kronander and A. Billard; Passive Interaction Control with Dynamical Systems;
+IEEE Robotics and Automation Letters; 2016
 
 ```
 
@@ -12,8 +13,14 @@ K. Kronander and A. Billard; Passive Interaction Control with Dynamical Systems;
 ```c++
 
 PassiveDSController * my_passive_ds;
-
+int D = 3 // dimensionality
+float eigval_0,eigval_1,max_tank_level, dz;
+eigval_0 = 50;
+eigval_1 = 100;
+max_tank_level = 10;
+dz = 0.01
 my_passive_ds = new PassiveDSController(D,eigval_0, eigval_1, max_tank_level, dz);
+
 ```
 The parameters `eigval_0` and `eigval_1` are the feedback gains along the desired direction of motion and its orthogonal complement respectively. The `max_tank_level` is the maximum energy level that is allowed to be produced when using non-conservative DS as task-model. The smoothness for cutting of non-conservatve control effort when approaching non-passive behavior is controller with `dz`. 
 
