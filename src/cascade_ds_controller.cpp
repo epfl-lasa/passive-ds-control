@@ -1,3 +1,4 @@
+
 #include "cascade_ds_controller.h"
 #include <iostream>
 CascadeDSController::CascadeDSController(size_t dim,  std::function<Vec(Vec)> task_dynamics,std::function<Vec(Vec)> process_filter) : dim_(dim)
