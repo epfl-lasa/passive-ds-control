@@ -1,13 +1,13 @@
 # Passive DS Control
 Catkin package implementing various DS controllers, including controller proposed in
-``` K. Kronander and A. Billard; Passive Interaction Control with Dynamical Systems; IEEE Robotics and Automation Letters; 2016
+```
+K. Kronander and A. Billard; Passive Interaction Control with Dynamical Systems; IEEE Robotics and Automation Letters; 2016
+
 ```
 
 [![Build Status](https://magnum.travis-ci.com/epfl-lasa/passive-ds-control.svg?token=BqUQb763tsVV4QyzLgBy&branch=master)](https://magnum.travis-ci.com/epfl-lasa/passive-ds-control)
 
 ## Minimal example
-
-
 
 ```c++
 
