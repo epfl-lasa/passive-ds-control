@@ -7,6 +7,8 @@
 
 // TODO: Add computation of control effort using stiffness and damping internally
 
+
+
 class CascadeDSController
 {
     static const int N_BURN=1000;

@@ -119,60 +119,6 @@ PassiveDSController::PassiveDSController(int dim, realtype damping_eigval0, real
     beta_s_(0.0,0.0,dz,0.0,s_max,ds),
     alpha_(0.0,0.0+ds,s_max-ds,s_max)
 {
-//    realtype z=0.2;
-//    realtype s=101.0;
-//    std::cout<<"z="<<z<<", s="<<s<<", beta_s="<<beta_s_(z,s)<<std::endl;
-//    z=0.2; s=100.0;
-//    std::cout<<"z="<<z<<", s="<<s<<", beta_s="<<beta_s_(z,s)<<std::endl;
-//    z=0.2; s=90.0;
-//    std::cout<<"z="<<z<<", s="<<s<<", beta_s="<<beta_s_(z,s)<<std::endl;
-//    z=0.2; s=2;
-//    std::cout<<"z="<<z<<", s="<<s<<", beta_s="<<beta_s_(z,s)<<std::endl;
-//    z=0.2; s=0.0;
-//    std::cout<<"z="<<z<<", s="<<s<<", beta_s="<<beta_s_(z,s)<<std::endl;
-
-
-//    std::cout<<std::endl;
-//    z=-0.2; s=100.0;
-//    std::cout<<"z="<<z<<", s="<<s<<", beta_s="<<beta_s_(z,s)<<std::endl;
-//    z=-0.2; s=90.0;
-//    std::cout<<"z="<<z<<", s="<<s<<", beta_s="<<beta_s_(z,s)<<std::endl;
-//    z=-0.2; s=2;
-//    std::cout<<"z="<<z<<", s="<<s<<", beta_s="<<beta_s_(z,s)<<std::endl;
-//    z=-0.2; s=0.0;
-//    std::cout<<"z="<<z<<", s="<<s<<", beta_s="<<beta_s_(z,s)<<std::endl;
-
-
-//    std::cout<<std::endl;
-//    z=0.2; s=101.0;
-//    std::cout<<"z="<<z<<", s="<<s<<", beta_r="<<beta_r_(z,s)<<std::endl;
-//    z=0.2; s=100.0;
-//    std::cout<<"z="<<z<<", s="<<s<<", beta_r="<<beta_r_(z,s)<<std::endl;
-//    z=0.2; s=90.0;
-//    std::cout<<"z="<<z<<", s="<<s<<", beta_r="<<beta_r_(z,s)<<std::endl;
-//    z=0.2; s=2;
-//    std::cout<<"z="<<z<<", s="<<s<<", beta_r="<<beta_r_(z,s)<<std::endl;
-//    z=0.2; s=0.0;
-//    std::cout<<"z="<<z<<", s="<<s<<", beta_r="<<beta_r_(z,s)<<std::endl;
-
-
-//    std::cout<<std::endl;
-//    z=-0.2; s=100.0;
-//    std::cout<<"z="<<z<<", s="<<s<<", beta_r="<<beta_r_(z,s)<<std::endl;
-//    z=-0.2; s=90.0;
-//    std::cout<<"z="<<z<<", s="<<s<<", beta_r="<<beta_r_(z,s)<<std::endl;
-//    z=-0.2; s=2;
-//    std::cout<<"z="<<z<<", s="<<s<<", beta_r="<<beta_r_(z,s)<<std::endl;
-//    z=-0.2; s=0.0;
-//    std::cout<<"z="<<z<<", s="<<s<<", beta_r="<<beta_r_(z,s)<<std::endl;
-
-
-//    std::cout<<"z=0.2, s=101.0: "<<beta_r_(0.2,101.0)<<std::endl;
-//    std::cout<<"z=0.2, s=0.0: "<<beta_r_(0.2,0.0)<<std::endl;
-//    std::cout<<"z=-0.2, s=101.0: "<<beta_r_(-0.2,101.0)<<std::endl;
-//    std::cout<<"z=-0.2, s=0.0: "<<beta_r_(-0.2,100.0)<<std::endl;
-//    exit(1);
-    //exit(1);
 
 }
 
