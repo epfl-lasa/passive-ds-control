@@ -1,7 +1,9 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(passive_ds_control)
 
-set(CMAKE_BUILD_TYPE Debug)
+#set(CMAKE_BUILD_TYPE Debug)
+SET(CMAKE_BUILD_TYPE RELEASE)
+
 set(CMAKE_CXX_FLAGS "-O3")
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
@@ -38,6 +40,7 @@ include_directories(include ${catkin_INCLUDE_DIRS})
 
 #this step is required to have the files how up in qtcreator
 file(GLOB HEADERS "include/*.h")
+#file(GLOB HEADERS "include/locally_modulated_ds/*.h")
 
 ## Declare a cpp library
 add_library(passive_ds_control
