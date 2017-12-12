@@ -60,14 +60,68 @@ void DSController::ComputeOrthonormalBasis(const Vec &dir){
     orthonormalize(basis_);
 }
 
+#include <iostream>
+
 void DSController::Update(const Vec &vel, const Vec &ref_vel)
 {
     // compute damping
     ComputeDamping(ref_vel);
     // dissipate
-    control_output_ = -damping_*vel;
+    // control_output_ = -damping_*vel;
+    // control_output_ = -damping_eigval_(0)*vel;
+/*
+
+    float normRefVel = sqrt(ref_vel(0)*ref_vel(0)+ref_vel(1)*ref_vel(1)+ref_vel(2)*ref_vel(2));
+    float scalarProjection = (vel(0)*ref_vel(0)+vel(1)*ref_vel(1)+vel(2)*ref_vel(2))/normRefVel;
+    Vec projectedVel = scalarProjection*ref_vel;
+    Vec orthogonalVel = vel-projectedVel;
+    control_output_ = -damping_eigval_(0)*vel-damping_eigval_(1)*orthogonalVel;*/
+
     // compute control
-    control_output_ += damping_eigval_(0)*ref_vel;
+    // control_output_ += damping_eigval_(0)*ref_vel;
+
+
+    Vec error;
+    error.resize(3,1);
+    error = vel-ref_vel;
+
+    Vec orthogonalError;
+    orthogonalError.resize(3,1);
+    orthogonalError = error;
+
+
+    Vec parallelError;
+    parallelError.resize(3,1);
+    parallelError.setZero();
+
+
+    if(ref_vel.norm()> MINSPEED)
+    {
+        parallelError = (error.dot(ref_vel)/pow(ref_vel.norm(),2.0f))*ref_vel;
+    }
+
+    orthogonalError -= parallelError;
+
+    control_output_ = -damping_eigval_(0,0)*parallelError-damping_eigval_(1,1)*orthogonalError;
+
+    ROS_INFO_STREAM_THROTTLE(1.0,"lambda_0: " << damping_eigval_(0,0) << " lambda_1: " << damping_eigval_(1,1) );
+
+    ROS_INFO_STREAM_THROTTLE(1.0,"p: " << parallelError(0) << " " << parallelError(1) << " " << parallelError(2) <<  " o:" << orthogonalError(0) << " " << orthogonalError(1) << " " << orthogonalError(2)); 
+    // ROS_INFO_STREAM_THROTTLE(thrott_time,"pos_cmd_: " << pos_cmd_(0) << " " <<  pos_cmd_(1) << " " <<  pos_cmd_(2) << " " << pos_cmd_(3) << " " <<  pos_cmd_(4) << " " <<  pos_cmd_(5) << " " << pos_cmd_(6));
+
+    ROS_INFO_STREAM_THROTTLE(1.0,"control_output_ : " << control_output_(0) << " " << control_output_(1) << " " << control_output_(2) );
+
+    
+//     e_o = x_r - x_d;
+//     e_p = 0;
+
+// if(xd > big_enough)
+//     e_p = (e^T * x_d ) * x_d  / (x_d^t * x_d);
+// end
+//     e_o -= e_p;
+
+//     F = - l0 * e_p - l1 * e_o;
+
 }
 
 void DSController::set_damping_eigval(realtype damping_eigval0,realtype damping_eigval1)
