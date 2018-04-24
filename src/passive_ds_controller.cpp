@@ -33,6 +33,10 @@ Mat DSController::damping_eigval() const
     return damping_eigval_;
 }
 
+Mat DSController::damping_matrix()
+{
+    return damping_;
+}
 
 
 Vec DSController::control_output() const

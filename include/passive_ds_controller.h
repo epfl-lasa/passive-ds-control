@@ -31,6 +31,7 @@ public:
 
     Mat damping_eigval() const;
     Vec control_output() const;
+    Mat damping_matrix();
 
 };
 
