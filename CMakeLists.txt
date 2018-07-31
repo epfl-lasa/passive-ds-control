@@ -8,7 +8,8 @@ set(CMAKE_CXX_FLAGS "-O3")
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
-find_package(catkin REQUIRED COMPONENTS)
+find_package(catkin REQUIRED COMPONENTS
+	         roscpp)
 
 add_definitions(-DUSE_DOUBLE_PRECISION)
 
@@ -25,7 +26,7 @@ add_definitions(-DUSE_DOUBLE_PRECISION)
 catkin_package(
   INCLUDE_DIRS include
   LIBRARIES passive_ds_control cascade_ds_control openloop_ds_control
-#  CATKIN_DEPENDS other_catkin_pkg
+ CATKIN_DEPENDS roscpp
 #  DEPENDS system_lib
 )
 
