@@ -71,7 +71,7 @@ void DSController::Update(const Vec &vel, const Vec &ref_vel)
     // compute damping
     ComputeDamping(ref_vel);
     // dissipate
-    // control_output_ = -damping_*vel;
+    control_output_ = -damping_*vel;
     // control_output_ = -damping_eigval_(0)*vel;
 /*
 
@@ -82,38 +82,38 @@ void DSController::Update(const Vec &vel, const Vec &ref_vel)
     control_output_ = -damping_eigval_(0)*vel-damping_eigval_(1)*orthogonalVel;*/
 
     // compute control
-    // control_output_ += damping_eigval_(0)*ref_vel;
+    control_output_ += damping_eigval_(0)*ref_vel;
 
 
-    Vec error;
-    error.resize(3,1);
-    error = vel-ref_vel;
+    // Vec error;
+    // error.resize(3,1);
+    // error = vel-ref_vel;
 
-    Vec orthogonalError;
-    orthogonalError.resize(3,1);
-    orthogonalError = error;
-
-
-    Vec parallelError;
-    parallelError.resize(3,1);
-    parallelError.setZero();
+    // Vec orthogonalError;
+    // orthogonalError.resize(3,1);
+    // orthogonalError = error;
 
 
-    if(ref_vel.norm()> MINSPEED)
-    {
-        parallelError = (error.dot(ref_vel)/pow(ref_vel.norm(),2.0f))*ref_vel;
-    }
+    // Vec parallelError;
+    // parallelError.resize(3,1);
+    // parallelError.setZero();
 
-    orthogonalError -= parallelError;
 
-    control_output_ = -damping_eigval_(0,0)*parallelError-damping_eigval_(1,1)*orthogonalError;
+    // if(ref_vel.norm()> MINSPEED)
+    // {
+    //     parallelError = (error.dot(ref_vel)/pow(ref_vel.norm(),2.0f))*ref_vel;
+    // }
 
-    ROS_INFO_STREAM_THROTTLE(1.0,"lambda_0: " << damping_eigval_(0,0) << " lambda_1: " << damping_eigval_(1,1) );
+    // orthogonalError -= parallelError;
 
-    ROS_INFO_STREAM_THROTTLE(1.0,"p: " << parallelError(0) << " " << parallelError(1) << " " << parallelError(2) <<  " o:" << orthogonalError(0) << " " << orthogonalError(1) << " " << orthogonalError(2)); 
-    // ROS_INFO_STREAM_THROTTLE(thrott_time,"pos_cmd_: " << pos_cmd_(0) << " " <<  pos_cmd_(1) << " " <<  pos_cmd_(2) << " " << pos_cmd_(3) << " " <<  pos_cmd_(4) << " " <<  pos_cmd_(5) << " " << pos_cmd_(6));
+    // control_output_ = -damping_eigval_(0,0)*parallelError-damping_eigval_(1,1)*orthogonalError;
 
-    ROS_INFO_STREAM_THROTTLE(1.0,"control_output_ : " << control_output_(0) << " " << control_output_(1) << " " << control_output_(2) );
+    // ROS_INFO_STREAM_THROTTLE(1.0,"lambda_0: " << damping_eigval_(0,0) << " lambda_1: " << damping_eigval_(1,1) );
+
+    // ROS_INFO_STREAM_THROTTLE(1.0,"p: " << parallelError(0) << " " << parallelError(1) << " " << parallelError(2) <<  " o:" << orthogonalError(0) << " " << orthogonalError(1) << " " << orthogonalError(2)); 
+    // // ROS_INFO_STREAM_THROTTLE(thrott_time,"pos_cmd_: " << pos_cmd_(0) << " " <<  pos_cmd_(1) << " " <<  pos_cmd_(2) << " " << pos_cmd_(3) << " " <<  pos_cmd_(4) << " " <<  pos_cmd_(5) << " " << pos_cmd_(6));
+
+    // ROS_INFO_STREAM_THROTTLE(1.0,"control_output_ : " << control_output_(0) << " " << control_output_(1) << " " << control_output_(2) );
 
     
 //     e_o = x_r - x_d;
